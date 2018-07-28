@@ -31,8 +31,8 @@ const mapping = {
   'text': Text,
   'polygon': Polygon,
   'polyline': Polyline,
-  'linearGradient': LinearGradient,
-  'radialGradient': RadialGradient,
+  'lineargradient': LinearGradient,
+  'radialgradient': RadialGradient,
   'use': Use,
   'defs': Defs,
   'stop': Stop
@@ -189,7 +189,9 @@ function traverse (markup, config, i = 0) {
   attrs.forEach((attr) => {
     elemAttributes[attr.name] = attr.value
   })
-
+  if(idName && (tagName.toLowerCase() == 'lineargradient' || tagName.toLowerCase() == 'radialgradient')){
+      elemAttributes['id'] = idName;
+  }
   const k = i + Math.random()
   return <Elem {...elemAttributes} key={k}>{ children }</Elem>
 }
